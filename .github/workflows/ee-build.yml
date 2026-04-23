@@ -37,12 +37,12 @@ on:
       ee_dir:
         description: "Directory containing the EE files (relative to repo root)"
         required: false
-        default: "jkee3"
+        default: "ee4"
         type: string
       ee_file_name:
         description: "EE definition file name"
         required: false
-        default: "jkee3.yml"
+        default: "ee4.yml"
         type: string
       ee_registry:
         description: "Container registry"
@@ -52,12 +52,12 @@ on:
       ee_image_name:
         description: "Container image name (defaults to repository name)"
         required: false
-        default: "jkee3"
+        default: ""
         type: string
       registry_tls_verify:
         description: "Verify TLS certificates for container registries (true/false)"
         required: false
-        default: "false"
+        default: "true"
         type: string
       image_build_tag:
         description: "Custom image tag for the build (defaults to build-<commit SHA>)"
@@ -86,10 +86,10 @@ env:
   # Container registry configuration (override via repository Variables)
   REGISTRY: ${{ inputs.ee_registry || vars.EE_REGISTRY || '3.93.219.131' }}
   IMAGE_NAME: ${{ inputs.ee_image_name || vars.EE_IMAGE_NAME || github.repository }}
-  EE_REGISTRY_TLS_VERIFY: ${{ inputs.registry_tls_verify || vars.EE_REGISTRY_TLS_VERIFY || 'false' }}
+  EE_REGISTRY_TLS_VERIFY: ${{ inputs.registry_tls_verify || vars.EE_REGISTRY_TLS_VERIFY || 'true' }}
   # EE directory and file name (override via workflow_dispatch inputs or repository Variables)
   EE_DIR: ${{ inputs.ee_dir || vars.EE_DIR || '.' }}
-  EE_FILE_NAME: ${{ inputs.ee_file_name || vars.EE_FILE_NAME || 'jkee3.yml' }}
+  EE_FILE_NAME: ${{ inputs.ee_file_name || vars.EE_FILE_NAME || 'ee4.yml' }}
   # Image build tag (override via workflow_dispatch input or repository Variable)
   IMAGE_BUILD_TAG: ${{ inputs.image_build_tag || vars.IMAGE_BUILD_TAG || format('build-{0}', github.sha) }}
   # Base image age thresholds (in days) - annotations only, never blocks the build
